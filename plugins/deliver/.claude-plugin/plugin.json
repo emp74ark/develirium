@@ -1,0 +1,7 @@
+{
+  "name": "deliver",
+  "version": "0.2.0",
+  "description": "Deliver a GitHub issue or task end to end: plan, review the plan, implement with TDD, review the implementation, open a pull request and watch CI.",
+  "author": { "name": "emp74ark" },
+  "keywords": ["workflow", "pull-request", "tdd", "review"]
+}

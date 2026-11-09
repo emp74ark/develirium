@@ -1,0 +1,15 @@
+# Copy to .agents/config.yml. Personal overrides go in .agents/config.local.yml (git-ignored).
+useWorktree: true
+
+models:
+  planner: 'default'
+  reviewer: 'default'
+  implementer: 'default'
+
+providers:
+  claude:
+    models:
+      planner: 'sonnet'
+      reviewer: 'sonnet'
+      implementer: 'sonnet'
+      implementerFallback: 'opus'
