@@ -13,3 +13,8 @@ providers:
       reviewer: 'sonnet'
       implementer: 'sonnet'
       implementerFallback: 'opus'
+  junie:
+    models:
+      planner: 'medium'
+      reviewer: 'high'
+      implementer: 'low'
