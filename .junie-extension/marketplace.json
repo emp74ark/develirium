@@ -1,0 +1,32 @@
+{
+  "name": "develirium",
+  "owner": {
+    "name": "Andrei Yurkouski"
+  },
+  "metadata": {
+    "description": "The deliver workflow for Claude Code and Junie — evaluate, plan, review, implement, and deliver as a pull request.",
+    "version": "1.0.0",
+    "homepage": "https://github.com/emp74ark/develirium"
+  },
+  "extensions": [
+    {
+      "name": "deliver",
+      "source": "./extensions/deliver",
+      "description": "Deliver a GitHub issue or task end to end: evaluate, plan, review, implement, and open a pull request with CI verification.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Andrei Yurkouski"
+      },
+      "category": "workflow",
+      "homepage": "https://github.com/emp74ark/develirium/tree/main/extensions/deliver",
+      "keywords": [
+        "deliver",
+        "workflow",
+        "github",
+        "pull-request",
+        "planning",
+        "review"
+      ]
+    }
+  ]
+}
