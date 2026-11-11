@@ -1,4 +1,5 @@
 {
   "name": "deliver",
+  "version": "0.3.0",
   "description": "Deliver a GitHub issue or task end to end: evaluate, plan, review, implement, and open a pull request with CI verification."
 }

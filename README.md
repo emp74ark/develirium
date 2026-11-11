@@ -80,10 +80,11 @@ Junie plays every role (planner, reviewer, implementer) itself, one step at a ti
 ## Layout
 
 ```
+CHANGELOG.md                             # version history, shared by both consumers
 .claude-plugin/marketplace.json          # Claude Code marketplace
 .junie-extension/marketplace.json        # Junie extensions marketplace
 extensions/deliver/                      # Junie extension
-├── extension.json                       # extension manifest
+├── extension.json                       # extension manifest (version, aligned with the plugin)
 ├── README.md                            # extension documentation
 ├── scripts/
 │   └── install.sh                       # /deliver:install setup script
@@ -99,7 +100,7 @@ extensions/deliver/                      # Junie extension
     └── install/
         └── SKILL.md                     # /deliver:install
 plugins/deliver/                         # Claude Code plugin
-├── .claude-plugin/plugin.json
+├── .claude-plugin/plugin.json           # plugin manifest (version, aligned with the extension)
 ├── agents/                              # planner, plan-reviewer, implementer, implementation-reviewer
 ├── skills/
 │   ├── run/SKILL.md                     # /deliver:run, the orchestrator
@@ -110,6 +111,17 @@ plugins/deliver/                         # Claude Code plugin
 ```
 
 `workflow.md` holds all rules; the provider skill (Claude `run/SKILL.md` or Junie `SKILL.md`) only says how to run them.
+
+## Versioning
+
+One version number for both consumers, bumped together, even when a change only touches one of them — tracking two independent version numbers for what is one workflow was more overhead than it was worth.
+
+- **Where it lives**: `plugins/deliver/.claude-plugin/plugin.json`'s `version` (Claude plugin) and `extensions/deliver/extension.json`'s `version` (Junie extension) must always match. The marketplace catalogs mirror the same value: `.junie-extension/marketplace.json`'s `extensions[].version` and its top-level `metadata.version`. (`.claude-plugin/marketplace.json`'s plugin entry has no `version` field of its own — Claude Code reads the plugin's version from `plugin.json`, and prefers it over a marketplace entry's version if one were set, so adding a second copy there would just be one more place to forget to bump.)
+- **Scheme**: semver (`major.minor.patch`). Claude Code does not enforce or compare semver itself — a plugin's `version` is only compared for *equality* against what a user has installed, so an unbumped version means an unchanged update is invisible to `/plugin marketplace update`. Semver is still the convention here because it communicates intent, and it is what Claude Code's own dependency-range resolution uses (via `<plugin>--v<version>` git tags) if this plugin is ever depended on by another.
+  - **Patch**: behavior-preserving fixes (e.g. the `$f` shell-variable bug in `run/SKILL.md`).
+  - **Minor**: backward-compatible additions (new skill, new config key, new subagent).
+  - **Major**: breaking changes (renamed slash command, changed `.agents/config.yml` schema, removed step).
+- **Bump every version-bearing file together, in the same commit as the change**, and record it in the root `CHANGELOG.md`, noting which consumer(s) the entry actually applies to — a fix or feature on one side (e.g. the Claude-only `$f` bug) still bumps the shared number even though the other consumer's content is unchanged.
 
 ## Safety
 
