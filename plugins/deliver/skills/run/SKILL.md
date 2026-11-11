@@ -19,7 +19,7 @@ Workflow file: `${CLAUDE_PLUGIN_ROOT}/workflow.md`. Profile: `.agents/deliver.pr
 Agent settings (`.agents/config.yml`, then `.agents/config.local.yml`; a later key wins):
 
 ```yaml
-!`for f in .agents/config.yml .agents/config.local.yml; do if [ -f "$f" ]; then cat "$f"; fi; done`
+!`cat .agents/config.yml .agents/config.local.yml 2>/dev/null || true`
 ```
 
 GitHub CLI status: !`bash ${CLAUDE_PLUGIN_ROOT}/scripts/gh-status.sh`
