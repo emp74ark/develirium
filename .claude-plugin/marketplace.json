@@ -1,7 +1,7 @@
 {
   "name": "develirium",
   "description": "Claude Code plugins for delivering tasks as pull requests.",
-  "owner": { "name": "Andrei Yurkouski" },
+  "owner": { "name": "emp74ark" },
   "plugins": [
     {
       "name": "deliver",
