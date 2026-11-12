@@ -8,6 +8,14 @@ consumer(s) it applies to. Versions follow [semver](https://semver.org):
 patch for behavior-preserving fixes, minor for backward-compatible
 additions, major for breaking changes.
 
+## 0.3.1
+
+- **Claude plugin.** The `run` skill now loads `workflow.md` into the prompt
+  with a shell injection instead of asking Claude to `Read` it from the plugin
+  cache. The read sat outside the project, so project-scope installs got a
+  "read outside the working directories" prompt on every run. The Junie
+  extension is unchanged.
+
 ## 0.3.0
 
 - **Both.** Added `version` to `extension.json` as the Junie extension's own

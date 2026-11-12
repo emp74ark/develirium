@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "The deliver workflow for Claude Code and Junie — evaluate, plan, review, implement, and deliver as a pull request.",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "homepage": "https://github.com/emp74ark/develirium"
   },
   "extensions": [
@@ -13,7 +13,7 @@
       "name": "deliver",
       "source": "./extensions/deliver",
       "description": "Deliver a GitHub issue or task end to end: evaluate, plan, review, implement, and open a pull request with CI verification.",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "author": {
         "name": "emp74ark"
       },

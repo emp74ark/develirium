@@ -3,12 +3,17 @@ name: run
 description: "Deliver a GitHub issue or a handwritten task end to end: evaluate it, write the plan, review the plan, implement, review the implementation, open a pull request and watch CI. Claude Code plugin: runs planner, reviewer and implementer subagents."
 argument-hint: "<issue number | issue URL | task description>"
 disable-model-invocation: true
+allowed-tools: Bash(cat ${CLAUDE_PLUGIN_ROOT}/workflow.md)
 effort: medium
 ---
 
 # Deliver
 
-Read the shared workflow first: `${CLAUDE_PLUGIN_ROOT}/workflow.md`. It holds the steps, checklists, loop limits, and verification rules. The project profile, `.agents/deliver.profile.md`, holds the project's commands, plan location, and required checks. This skill only says how to run the workflow in Claude Code.
+The shared workflow is below (`${CLAUDE_PLUGIN_ROOT}/workflow.md`, already loaded; do not read it again). It holds the steps, checklists, loop limits, and verification rules. The project profile, `.agents/deliver.profile.md`, holds the project's commands, plan location, and required checks. This skill only says how to run the workflow in Claude Code.
+
+````markdown
+!`cat ${CLAUDE_PLUGIN_ROOT}/workflow.md`
+````
 
 You are the orchestrator. You do not plan, write code, or review code yourself. You route work to subagents, pass their results between them, talk to the user, and run git and `gh`. Keep your own context small: pass file paths to subagents, not file contents.
 
