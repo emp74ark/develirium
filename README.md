@@ -67,6 +67,29 @@ Invoke the skill in a Junie session:
 
 Junie plays every role (planner, reviewer, implementer) itself, one step at a time. The reviews are self-reviews: Junie re-reads its own work from disk before reviewing.
 
+## Antigravity
+
+### Install
+
+```bash
+agy plugin install https://github.com/emp74ark/develirium
+```
+
+From a local clone, run `scripts/install.sh antigravity` (uses `agy plugin install`, or copies the plugin to `~/.gemini/config/plugins/deliver` if `agy` is missing).
+
+### Set up a project
+
+Run `bash skills/deliver/scripts/install.sh` from the plugin folder inside your project. It creates `.agents/deliver.profile.md` and `.agents/config.yml` and never overwrites existing files. Fill in the profile.
+
+### Use
+
+```
+/deliver 123
+/deliver add a --dry-run flag to the export command
+```
+
+The orchestrator runs the four subagents in `agents/` when Antigravity can spawn them, otherwise it plays each role itself.
+
 ### Config (`.agents/config.yml`, overridden by `.agents/config.local.yml`)
 
 | Key | Default | Effect |
@@ -76,6 +99,7 @@ Junie plays every role (planner, reviewer, implementer) itself, one step at a ti
 | `providers.claude.models.<role>` | `models` | Claude override: aliases such as `sonnet`, `opus`, `haiku`. |
 | `providers.claude.models.implementerFallback` | `sonnet` | Claude: model for the last implementation attempt after 2 failed reviews. |
 | `providers.junie.models.<role>` | `models` | Junie: reasoning-depth hint (`low`, `medium`, `high`) per role. |
+| `providers.antigravity.models.<role>` | `models` | Antigravity: reasoning-depth hint per role. |
 
 ## Layout
 
@@ -83,6 +107,13 @@ Junie plays every role (planner, reviewer, implementer) itself, one step at a ti
 CHANGELOG.md                             # version history, shared by both consumers
 .claude-plugin/marketplace.json          # Claude Code marketplace
 .junie-extension/marketplace.json        # Junie extensions marketplace
+.antigravity-plugin/plugin.json          # Antigravity plugin manifest (repo root is the plugin)
+scripts/install.sh                       # installs the plugin for a target (antigravity)
+agents/                                  # Antigravity subagents: planner, plan-reviewer, implementer, implementation-reviewer
+skills/deliver/                          # Antigravity skill
+├── SKILL.md                             # deliver, the orchestrator
+├── references/                          # workflow.md, profile.example.md, config.example.yml
+└── scripts/                             # gh-status.sh, install.sh (project setup)
 extensions/deliver/                      # Junie extension
 ├── extension.json                       # extension manifest (version, aligned with the plugin)
 ├── README.md                            # extension documentation
@@ -114,9 +145,9 @@ plugins/deliver/                         # Claude Code plugin
 
 ## Versioning
 
-One version number for both consumers, bumped together, even when a change only touches one of them — tracking two independent version numbers for what is one workflow was more overhead than it was worth.
+One version number for all consumers, bumped together, even when a change only touches one of them — tracking two independent version numbers for what is one workflow was more overhead than it was worth.
 
-- **Where it lives**: `plugins/deliver/.claude-plugin/plugin.json`'s `version` (Claude plugin) and `extensions/deliver/extension.json`'s `version` (Junie extension) must always match. The marketplace catalogs mirror the same value: `.junie-extension/marketplace.json`'s `extensions[].version` and its top-level `metadata.version`. (`.claude-plugin/marketplace.json`'s plugin entry has no `version` field of its own — Claude Code reads the plugin's version from `plugin.json`, and prefers it over a marketplace entry's version if one were set, so adding a second copy there would just be one more place to forget to bump.)
+- **Where it lives**: `plugins/deliver/.claude-plugin/plugin.json`'s `version` (Claude plugin) and `extensions/deliver/extension.json`'s `version` (Junie extension) must always match. `.antigravity-plugin/plugin.json`'s `version` must match too. The marketplace catalogs mirror the same value: `.junie-extension/marketplace.json`'s `extensions[].version` and its top-level `metadata.version`. (`.claude-plugin/marketplace.json`'s plugin entry has no `version` field of its own — Claude Code reads the plugin's version from `plugin.json`, and prefers it over a marketplace entry's version if one were set, so adding a second copy there would just be one more place to forget to bump.)
 - **Scheme**: semver (`major.minor.patch`). Claude Code does not enforce or compare semver itself — a plugin's `version` is only compared for *equality* against what a user has installed, so an unbumped version means an unchanged update is invisible to `/plugin marketplace update`. Semver is still the convention here because it communicates intent, and it is what Claude Code's own dependency-range resolution uses (via `<plugin>--v<version>` git tags) if this plugin is ever depended on by another.
   - **Patch**: behavior-preserving fixes (e.g. the `$f` shell-variable bug in `run/SKILL.md`).
   - **Minor**: backward-compatible additions (new skill, new config key, new subagent).

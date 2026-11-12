@@ -8,6 +8,17 @@ consumer(s) it applies to. Versions follow [semver](https://semver.org):
 patch for behavior-preserving fixes, minor for backward-compatible
 additions, major for breaking changes.
 
+## 0.4.0
+
+- **Antigravity (new).** Added Google Antigravity support. The repo root is an
+  Antigravity plugin (`.antigravity-plugin/plugin.json`) with a `deliver`
+  skill in `skills/deliver/` (orchestrator, `references/`, `scripts/`) and four
+  subagents in `agents/`. `scripts/install.sh antigravity` installs it with
+  `agy plugin install`, or copies it to `~/.gemini/config/plugins/deliver`
+  when `agy` is missing. The manifest carries the shared version number and
+  passes `agy plugin validate --strict`. The Claude plugin and the Junie
+  extension are unchanged.
+
 ## 0.3.1
 
 - **Claude plugin.** The `run` skill now loads `workflow.md` into the prompt

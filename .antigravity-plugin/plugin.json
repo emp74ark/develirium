@@ -1,0 +1,15 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "deliver",
+  "displayName": "Deliver",
+  "version": "0.4.0",
+  "description": "Deliver a GitHub issue or task end to end: evaluate, plan, review, implement, and open a pull request with CI verification.",
+  "suggestedPrompts": [
+    "/deliver 123",
+    "/deliver add a --dry-run flag to the export command"
+  ],
+  "author": { "name": "emp74ark" },
+  "homepage": "https://github.com/emp74ark/develirium",
+  "repository": "https://github.com/emp74ark/develirium",
+  "keywords": ["deliver", "workflow", "github", "pull-request", "planning", "review"]
+}
