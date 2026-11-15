@@ -79,7 +79,7 @@ From a local clone, run `scripts/install.sh antigravity` (uses `agy plugin insta
 
 ### Set up a project
 
-Run `bash skills/deliver/scripts/install.sh` from the plugin folder inside your project. It creates `.agents/deliver.profile.md` and `.agents/config.yml` and never overwrites existing files. Fill in the profile.
+Run `/deliver:install` in Antigravity (or run `bash skills/deliver/scripts/install.sh` from your project root). It creates `.agents/deliver.profile.md` and `.agents/config.yml` and never overwrites existing files. Fill in the profile.
 
 ### Use
 
@@ -99,21 +99,24 @@ The orchestrator runs the four subagents in `agents/` when Antigravity can spawn
 | `providers.claude.models.<role>` | `models` | Claude override: aliases such as `sonnet`, `opus`, `haiku`. |
 | `providers.claude.models.implementerFallback` | `sonnet` | Claude: model for the last implementation attempt after 2 failed reviews. |
 | `providers.junie.models.<role>` | `models` | Junie: reasoning-depth hint (`low`, `medium`, `high`) per role. |
-| `providers.antigravity.models.<role>` | `models` | Antigravity: reasoning-depth hint per role. |
+| `providers.antigravity.models.<role>` | `models` | Antigravity: model tier (`inherit`, `pro`, `flash`) or reasoning-depth hint per role. |
 
 ## Layout
 
 ```
-CHANGELOG.md                             # version history, shared by both consumers
+CHANGELOG.md                             # version history, shared across all three consumers
 .claude-plugin/marketplace.json          # Claude Code marketplace
 .junie-extension/marketplace.json        # Junie extensions marketplace
 .antigravity-plugin/plugin.json          # Antigravity plugin manifest (repo root is the plugin)
 scripts/install.sh                       # installs the plugin for a target (antigravity)
 agents/                                  # Antigravity subagents: planner, plan-reviewer, implementer, implementation-reviewer
-skills/deliver/                          # Antigravity skill
-├── SKILL.md                             # deliver, the orchestrator
-├── references/                          # workflow.md, profile.example.md, config.example.yml
-└── scripts/                             # gh-status.sh, install.sh (project setup)
+skills/
+├── deliver/                             # Antigravity deliver orchestrator
+│   ├── SKILL.md                         # deliver skill
+│   ├── references/                      # workflow.md, profile.example.md, config.example.yml, examples/
+│   └── scripts/                         # gh-status.sh, install.sh (project setup)
+└── install/                             # Antigravity install skill
+    └── SKILL.md                         # /deliver:install project setup
 extensions/deliver/                      # Junie extension
 ├── extension.json                       # extension manifest (version, aligned with the plugin)
 ├── README.md                            # extension documentation

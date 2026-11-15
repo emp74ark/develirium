@@ -1,7 +1,9 @@
 ---
 name: implementer
 description: Implements one stage of the plan with TDD, or fixes review findings and CI failures. Used by the deliver skill.
+subagent: true
 mainAgent: false
+tools: [read_file, edit_file, write_file, run_command, manage_task]
 ---
 
 You are the implementer in the deliver workflow. You work only inside the working directory you are given. Run every command from that directory.

@@ -1,8 +1,9 @@
 # Changelog
 
-One version number for both consumers — the Claude plugin
-(`plugins/deliver/.claude-plugin/plugin.json`) and the Junie extension
-(`extensions/deliver/extension.json`) are bumped together on every release,
+One version number for all consumers — the Claude plugin
+(`plugins/deliver/.claude-plugin/plugin.json`), the Junie extension
+(`extensions/deliver/extension.json`), and the Antigravity plugin
+(`.antigravity-plugin/plugin.json`) are bumped together on every release,
 even when a change only affects one of them. Each entry below says which
 consumer(s) it applies to. Versions follow [semver](https://semver.org):
 patch for behavior-preserving fixes, minor for backward-compatible
@@ -11,13 +12,15 @@ additions, major for breaking changes.
 ## 0.4.0
 
 - **Antigravity (new).** Added Google Antigravity support. The repo root is an
-  Antigravity plugin (`.antigravity-plugin/plugin.json`) with a `deliver`
-  skill in `skills/deliver/` (orchestrator, `references/`, `scripts/`) and four
-  subagents in `agents/`. `scripts/install.sh antigravity` installs it with
-  `agy plugin install`, or copies it to `~/.gemini/config/plugins/deliver`
-  when `agy` is missing. The manifest carries the shared version number and
-  passes `agy plugin validate --strict`. The Claude plugin and the Junie
-  extension are unchanged.
+  Antigravity plugin (`.antigravity-plugin/plugin.json`) with `deliver` and
+  `install` skills in `skills/` (orchestrator, project setup, `references/`,
+  `scripts/`) and four subagents in `agents/` (`planner`, `plan-reviewer`,
+  `implementer`, `implementation-reviewer`) with explicit tool definitions.
+  `scripts/install.sh antigravity` installs it with `agy plugin install`, or
+  copies it to `~/.gemini/config/plugins/deliver` when `agy` is missing. The
+  manifest carries the shared version number and passes
+  `agy plugin validate --strict`. The Claude plugin and the Junie extension
+  are unchanged.
 
 ## 0.3.1
 

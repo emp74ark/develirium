@@ -18,7 +18,7 @@ case "$target" in
       cp -R "$repo_root/.antigravity-plugin" "$repo_root/skills" "$repo_root/agents" "$dest_dir/"
       echo "installed $repo_root -> $dest_dir"
     fi
-    echo "next: in your project run 'bash <plugin>/skills/deliver/scripts/install.sh' to create .agents/ files"
+    echo "next: in your project run '/deliver:install' (or 'bash <plugin>/skills/deliver/scripts/install.sh') to create .agents/ files"
     ;;
   *)
     echo "usage: $0 antigravity" >&2
