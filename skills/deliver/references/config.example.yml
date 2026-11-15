@@ -19,8 +19,8 @@ providers:
       reviewer: 'high'
       implementer: 'low'
   antigravity:
-    # Model tier ('inherit', 'pro', 'flash') or reasoning-depth hint. 'default' inherits session model.
+    # Model tier ('inherit', 'pro', 'flash', 'flash_lite'). 'default' inherits session model.
     models:
-      planner: 'default'
-      reviewer: 'default'
-      implementer: 'default'
+      planner: 'flash'
+      reviewer: 'flash'
+      implementer: 'flash_lite'

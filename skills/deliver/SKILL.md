@@ -26,10 +26,10 @@ You are the orchestrator (Steps 1–3, 6, and 9–11): manage git and `gh`, coor
 
 ### Execution Mode
 
-1. **Subagents mode (preferred):** When your environment supports spawning subagents (`invoke_subagent`), spawn the subagent named in the table. Pass `Model` from `providers.antigravity.models.<key>` in `.agents/config.yml` (e.g. `inherit`, `pro`, `flash`; omit or use `inherit` when set to `default`). Pass paths, not contents: the absolute path of the working directory, the workflow file [workflow.md](./references/workflow.md), the profile, and the step's specific inputs.
+1. **Subagents mode (preferred):** When your environment supports spawning subagents (`invoke_subagent`), spawn the subagent named in the table. Pass `Model` from `providers.antigravity.models.<key>` in `.agents/config.yml` (e.g. `inherit`, `pro`, `flash`, `flash_lite`; omit or use `inherit` when set to `default`). Pass paths, not contents: the absolute path of the working directory, the workflow file [workflow.md](./references/workflow.md), the profile, and the step's specific inputs.
 2. **Single-agent mode (fallback):** If subagents cannot be spawned, play each role yourself: read its agent definition in `../../agents/<name>.md` first, and work strictly as that role until the step is complete. When self-reviewing (Steps 5 and 8), always re-read files from disk rather than relying on memory.
 
-`providers.antigravity.models` in `.agents/config.yml` specifies the subagent model tier (`inherit`, `pro`, `flash`) or reasoning-depth hint: reason more thoroughly as planner and reviewer, and focus on fast execution as implementer.
+`providers.antigravity.models` in `.agents/config.yml` specifies the subagent model tier (`inherit`, `pro`, `flash`, `flash_lite`): for example, `flash` for planner and reviewer, and `flash_lite` for implementer.
 
 ## Steps
 

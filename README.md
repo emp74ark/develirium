@@ -99,7 +99,7 @@ The orchestrator runs the four subagents in `agents/` when Antigravity can spawn
 | `providers.claude.models.<role>` | `models` | Claude override: aliases such as `sonnet`, `opus`, `haiku`. |
 | `providers.claude.models.implementerFallback` | `sonnet` | Claude: model for the last implementation attempt after 2 failed reviews. |
 | `providers.junie.models.<role>` | `models` | Junie: reasoning-depth hint (`low`, `medium`, `high`) per role. |
-| `providers.antigravity.models.<role>` | `models` | Antigravity: model tier (`inherit`, `pro`, `flash`) or reasoning-depth hint per role. |
+| `providers.antigravity.models.<role>` | `models` | Antigravity: model tier (`inherit`, `pro`, `flash`, `flash_lite`) or reasoning-depth hint per role. |
 
 ## Layout
 
