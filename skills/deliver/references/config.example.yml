@@ -1,0 +1,26 @@
+# Copy to .agents/config.yml. Personal overrides go in .agents/config.local.yml (git-ignored).
+useWorktree: true
+
+models:
+  planner: 'default'
+  reviewer: 'default'
+  implementer: 'default'
+
+providers:
+  claude:
+    models:
+      planner: 'sonnet'
+      reviewer: 'sonnet'
+      implementer: 'sonnet'
+      implementerFallback: 'opus'
+  junie:
+    models:
+      planner: 'medium'
+      reviewer: 'high'
+      implementer: 'low'
+  antigravity:
+    # Model tier ('inherit', 'pro', 'flash', 'flash_lite'). 'default' inherits session model.
+    models:
+      planner: 'flash'
+      reviewer: 'flash'
+      implementer: 'flash_lite'
